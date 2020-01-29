@@ -5,4 +5,4 @@ Team Members:<br/>
 
 <a href="https://github.com/TheMartyLekekas">Martynas Lekeckas</a><br/>
 <a href="https://github.com/AmirNeutron"> Al-Amir Teniola Abidemi Adegbuji-Onikoyi</a><br/>
-<a href="">Sebastian Baszczynski</a><br/>
+<a href="https://github.com/MiddleTv">Sebastian Baszczynski</a><br/>
