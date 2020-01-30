@@ -1,8 +1,8 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-#define MAX 10
-#define MAXNUMBER 5
+#define MAX 100
+#define MAXNUMBER 20
 
 void create_random(int *tab) {    // pointer fills the table
   *tab = (rand() % (MAXNUMBER + 1));
