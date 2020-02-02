@@ -1,13 +1,13 @@
 /* ====================================
-File name: exerc_x_y.c (or cpp)
-Date: 2020-mm-dd
-Group nr xxx
-Members that contributeto the solutions
-xxxxxxx
-xxxyyyyyyy
-yyyzzzzz zzzzzz
+File name: exerc_2_5.c
+Date: 2020-01-29
+Group nr 11
+Members that contributed to the solutions
+Martynas Lekeckas
+Al-Amir Teniola Abidemi Adegbuji-Onikoyi
+Sebastian Baszczynski
 Member not present at demonstration time:
-Yyyyyy yyyy
+-
 Demonstration code: [<Ass code 1-4> <abc>]Important , No code no exercise points
 !====================================== */
 

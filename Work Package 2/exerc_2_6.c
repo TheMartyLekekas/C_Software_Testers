@@ -1,13 +1,13 @@
 /* ====================================
-File name: exerc_x_y.c (or cpp)
-Date: 2020-mm-dd
-Group nr xxx
-Members that contributeto the solutions
-xxxxxxx
-xxxyyyyyyy
-yyyzzzzz zzzzzz
+File name: exerc_2_6.c
+Date: 2020-02-02
+Group nr 11
+Members that contributed to the solutions
+Martynas Lekeckas
+Al-Amir Teniola Abidemi Adegbuji-Onikoyi
+Sebastian Baszczynski
 Member not present at demonstration time:
-Yyyyyy yyyy
+-
 Demonstration code: [<Ass code 1-4> <abc>]Important , No code no exercise points
 !====================================== */
 
@@ -46,19 +46,30 @@ int output( int list[], int max) {    // required user input: "-1"
 
 
 int main (void) {
+    int valid;
     int que[MAX], i, in;
     initQue(que, MAX);
 
-    while(in != "q") {
+
+    while(in != -3) {
       for(i = 0; i < MAX; i++) {
         printf("%d ", que[i]);
       }  printf("\n");
 
-      scanf("%d", &in);
-      if(in == -1) {
-        output(que, MAX);
-      } else{
+      valid = scanf("%d", &in);
+      if(valid != 1){
+        printf("Invalid input\n");
+        break;
+
+      } else if(in == -1) {
+          output(que, MAX);
+
+      } else if(in > -1) {
         input(que, in, MAX);
+
+      } else {
+        printf("Negative values are not allowed\n");
+
       }
     }
 
