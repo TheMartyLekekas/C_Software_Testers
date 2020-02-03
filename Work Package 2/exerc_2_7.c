@@ -11,38 +11,75 @@ Member not present at demonstration time:
 Demonstration code: [<Ass code 1-4> <abc>]Important , No code no exercise points
 !====================================== */
 
-#include <stdlib.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 
-
-void readPersnr(char *user);
-
-int main(int argc, char const *argv[]) {
-  char personNum[11];
-  char *person = personNum;
+void readPersnr(char *person);
+int controlDigit(const char *personNum);
 
 
+int main(void)  {
+  char socialNum[11];
+  char *person = socialNum;
 
-  //printf("Number is %s\n", personNum);
-  readPersnr(personNum);
+    do
+    {
+        readPersnr(person);
 
-  return 0;
+    } while ((*person != 'q'));
+
+    return 0;
 }
 
-void readPersnr(char *user) {
+void readPersnr(char *person)
+{
+  char year[3];
+  char month[3];
+  char day[3];
+  int convert[10];
+  printf("\n\nEnter 10 digits Personal # or q to cancel: \n\n");
+  scanf("%s", person);
 
-  const char *person = user;
+  if (person[0] == 'q') {
+      printf("Program Canceled... Good bye!\n" );
 
-  printf("Please enter your personal number(yymmddxxxx):\n");
-  scanf("%s", user);
+  } else {
 
-  char yy[5];
-  char mm[5];
-  char dd[5];
+    year[0] = *person;
+    person++;
+    year[1] = *person;
+    year[2] = '\0';
+    person++;
+    convert[0] = atoi(year);
 
-  yy[0] = user[0];
-  user++;
+    month[0] = *person;
+    person++;
+    month[1] = *person;
+    month[2] = '\0';
+    person++;
+    convert[1] = atoi(month);
 
-  printf("You were born in the year 19%s\n",yy[0]);
+    day[0] = *person;
+    person++;
+    day[1] = *person;
+    day[2] = '\0';
+    person++;
+    convert[2] = atoi(day);
+
+    if (convert[0]>00 && convert[0]<=99 && convert[1]>=01 && convert[1]<=12 && convert[2]>=01 && convert[2]<=31) {
+      printf("Personal number is correct\n");
+    } else {
+      printf("Incorrect Personal Number\n");
+    }
+
+    const char *pointer = person;
+    int scanNum = controlDigit(pointer);
+
+  }
+
+}
+
+int controlDigit(const char *personNum) {
+  /* code */
 }

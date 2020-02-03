@@ -39,7 +39,7 @@ int main() {
         scanf("%20s",&input);
     } else if (option == 2) {
         FILE *fp;
-        if ((fp = fopen("../txtfile.txt", "r")) == NULL) {
+        if ((fp = fopen("../myfile.txt", "r")) == NULL) {
             printf("Error! opening file");
             return (0);
         } else {
