@@ -18,7 +18,7 @@ void clear_stdin();
 
 int main()
 {
-    int playAgainC;
+    int playAgainC = 0;
     printf("Welcome to NIM by Sebastian Baszczynski\n");
 
     while(playAgainC == 0) {
