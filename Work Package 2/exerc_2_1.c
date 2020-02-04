@@ -14,7 +14,6 @@ Demonstration code: [<Ass code 1-4> <abc>]Important , No code no exercise points
 #include <stdio.h>
 #include <string.h>
 
-//Exerc_2_ 1
 
 void dupeString(char[], char[]);
 
@@ -39,7 +38,8 @@ int main() {
         scanf("%20s",&input);
     } else if (option == 2) {
         FILE *fp;
-        if ((fp = fopen("../myfile.txt", "r")) == NULL) {
+        char filename[] = {"./myfile.txt"};
+        if ((fp = fopen(filename, "r")) == NULL) {
             printf("Error! opening file");
             return (0);
         } else {
@@ -68,8 +68,8 @@ int main() {
 }
 
 void dupeString(char* duplicate, char* original){
-    int size = sizeof(original);
-    for(int i = 0; i < size; i++){
+    int size = strlen(original);
+    for(int i = 0; i < size+1; i++){
         duplicate[i] = original[i];
     }
 }
