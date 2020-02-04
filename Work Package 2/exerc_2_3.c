@@ -13,10 +13,12 @@ Demonstration code: [<Ass code 1-4> <abc>]Important , No code no exercise points
 
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
+#include <ctype.h>
 
 void withLibrary(int val, char* arr1, char* arr2) {
   if(val==3) {
-  	if(strcmp(arr1, arr2)==0)
+  	if(stricmp(arr1, arr2)==0)
   	{
   		printf("The strings are identical");
   	}
@@ -38,7 +40,7 @@ void withoutLibrary(int val, char* string1, char* string2)
       while(string1[i] != '\0' && string2[i] != '\0')
       {
           //Breaks if there is difference in character
-          if(string1[i] != string2[i])
+          if(tolower(string1[i]) != tolower(string2[i]))
           {
               counter = 1;
               break;
@@ -69,7 +71,7 @@ int main(int argc,char* argv[]) {
   int* num = &value;
 
 
-  withLibrary(*num, argv1, argv2);     // Method call to compare with the standard library
+  //withLibrary(*num, argv1, argv2);     // Method call to compare with the standard library
   printf("\n\n");
   withoutLibrary(*num, argv1, argv2);  // Method call to compare without Library
 
