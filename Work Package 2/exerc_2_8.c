@@ -1,4 +1,17 @@
-#include<stdio.h>
+/* ====================================
+File name: exerc_2_8.c
+Date: 2020-02-05
+Group nr 11
+Members that contributed to the solutions
+Martynas Lekeckas
+Al-Amir Teniola Abidemi Adegbuji-Onikoyi
+Sebastian Baszczynski
+Member not present at demonstration time:
+-
+Demonstration code: [<Ass code 1-4> <abc>]Important , No code no exercise points
+!====================================== */
+
+#include <stdio.h>
 #include<stdlib.h>
 #include<stdbool.h>
 #include<time.h>
@@ -19,7 +32,7 @@ void clear_stdin();
 int main()
 {
     int playAgainC = 0;
-    printf("Welcome to NIM by Sebastian Baszczynski\n");
+    printf("Welcome to NIM\n");
 
     while(playAgainC == 0) {
         int pile,player,n_coins; /*coins taken*/

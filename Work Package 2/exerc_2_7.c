@@ -19,13 +19,13 @@ void readPersnr(char *person);
 int controlDigit(const char *persnr);
 
 
-int main(void)  {
+int main()  {
   char socialNum[11];
   char *person = socialNum;
 
     do {
       readPersnr(person);
-    } while ((*person != 'q'));
+    } while (*person != 'q');
 
     return 0;
 }
