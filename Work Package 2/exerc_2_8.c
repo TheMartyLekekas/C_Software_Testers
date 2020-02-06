@@ -8,10 +8,10 @@ Al-Amir Teniola Abidemi Adegbuji-Onikoyi
 Sebastian Baszczynski
 Member not present at demonstration time:
 -
-Demonstration code: [<Ass code 1-4> <abc>]Important , No code no exercise points
+Demonstration code: [27802]Important , No code no exercise points
 !====================================== */
 
-#include <stdio.h>
+#include<stdio.h>
 #include<stdlib.h>
 #include<stdbool.h>
 #include<time.h>

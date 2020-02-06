@@ -60,9 +60,9 @@ int main() {
 }
 
 int read(char *dirs, int *xpos, int *ypos) {
-    printf("Enter starting x position (0-99): ");
     char xinput[2], yinput[2];
-    // scanf("%d", xpos);
+    
+    printf("Enter starting x position (0-99): ");
     scanf("%s", xinput);
     *xpos = atoi(xinput);
     if (!isdigit(*xinput) || *xpos < 0 || *xpos > 99)
@@ -72,7 +72,6 @@ int read(char *dirs, int *xpos, int *ypos) {
     }
 
     printf("Enter starting y position (0-99): ");
-    // scanf("%d", ypos);
     scanf("%s", yinput);
     *ypos = atoi(yinput);
     if (!isdigit(*yinput) || *ypos < 0 || *ypos > 99)
