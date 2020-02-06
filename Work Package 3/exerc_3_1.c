@@ -22,7 +22,7 @@ typedef struct {
     enum DIRECTION dir;
 } ROBOT;
 
-void read(char *dirs, int *xpos, int *ypos);
+int read(char *dirs, int *xpos, int *ypos);
 void move(int *xpos, int *ypos, char dir);
 void turn(enum DIRECTION *dir);
 
@@ -39,41 +39,62 @@ int main() {
 
 
     do {
-        read(dirs, posx, posy);
-        
-        int i;
-        for (i = 0; i < strlen(directions); i++)
+        int check = read(dirs, posx, posy);
+        if(check == 1)
         {
-            if (directions[i] != 'm' && directions[i] != 't')
+            int i;
+            for (i = 0; i < strlen(directions); i++)
             {
-                printf("Invalid input\n");
-                break;
+                if (directions[i] == 'm') {
+                    move(posx, posy, robot.dir);
+
+                } else {
+                    turn(dire);
+                }
             }
+                printf("Robot's final position is {%d, %d}\n\n", *posx, *posy, robot.dir);
         }
 
-        for (i = 0; i < strlen(directions); i++)
-        {
-            if (directions[i] == 'm') {
-                move(posx, posy, robot.dir);
-
-            } else {
-                turn(dire);
-            }
-        }
-            printf("Your final position is {%d, %d}\n", *posx, *posy, robot.dir);
-    
     } while (*dirs != 'q');
     return 0;
 }
 
-void read(char *dirs, int *xpos, int *ypos) {
-    printf("Enter starting x position: \n");
+int read(char *dirs, int *xpos, int *ypos) {
+    printf("Enter starting x position (0-99): ");
+    // char xinput[2], yinput[2];
     scanf("%d", xpos);
-    printf("Enter starting y position: \n");
+    // scanf("%s", xinput);
+    // *xpos = atoi(xinput);
+    if(*xpos < 0 || *xpos > 99)
+    {
+        printf("Invalid coordinates\n");
+        return 0;
+    }
+
+    printf("Enter starting y position (0-99): ");
     scanf("%d", ypos);
-    printf("Enter directions\n");
-    scanf("%s", dirs);    
+    // scanf("%s", yinput);
+    // *ypos = atoi(yinput);
+    if (*ypos < 0 || *ypos > 99)
+    {
+        printf("Invalid coordinates\n");
+        return 0;
+    }
+
+    printf("Enter directions {m, t}\n");
+    scanf("%s", dirs);
+    int i;
+    for (i = 0; i < strlen(dirs); i++)
+    {
+        if (dirs[i] != 'm' && dirs[i] != 't')
+        {
+            printf("Invalid directions\n");
+            return 0;
+        }
+    }
+        return 1;
 }
+
 
 void move(int *xpos, int *ypos, char dir) {
     switch (dir)
@@ -93,6 +114,7 @@ void move(int *xpos, int *ypos, char dir) {
         }
 }
 
+
 void turn(enum DIRECTION *dir) {
     switch (*dir)
     {
@@ -102,10 +124,10 @@ void turn(enum DIRECTION *dir) {
     case 69:            // ASCII for 'E'
         *dir = 83;
         break;
-    case 83:             // ASCII for 'E'
+    case 83:            // ASCII for 'E'
         *dir = 87;
         break;
-    case 87:             // ASCII for 'E'
+    case 87:            // ASCII for 'E'
         *dir = 78;
         break;
     }
