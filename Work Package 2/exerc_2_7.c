@@ -43,7 +43,7 @@ void readPersnr(char *person)
   if (person[0] == 'q') {
     printf("Program Cancelled... Good bye!\n" );
 
-  } else if (strlen(person) != 10) {
+  } else if (strlen(person) != 10 || !isdigit(*person)) {
     printf("Invalid input\n");
 
   } else {
