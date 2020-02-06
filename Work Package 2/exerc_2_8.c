@@ -18,6 +18,8 @@ Demonstration code: [<Ass code 1-4> <abc>]Important , No code no exercise points
 #include<string.h>
 
 #define MAX_COINS 13
+#define true 1
+#define false 0
 
 const int HUMAN = 0;
 const int COMPUTER = 1;
@@ -31,35 +33,34 @@ void clear_stdin();
 
 int main()
 {
-    int playAgainC = 0;
+    int active = true;
     printf("Welcome to NIM\n");
 
-    while(playAgainC == 0) {
-        int pile,player,n_coins; /*coins taken*/
-        srand( time(0) );		/* Setup random */
-
-        pile = MAX_COINS;		/* Set start values (= init) */
+    while(active) {
+        int pile,player,n_coins;
+        srand( time(0) );
+        pile = MAX_COINS;
         player = HUMAN;
 
-            while (true) {
-                printf("There are %d on the pile\n", pile);
+        while (true) {
+            printf("There are %d on the pile\n", pile);
 
 
-                if (player == HUMAN) {
-                    n_coins = human_choice(pile);
-                } else {
-                    n_coins = computer_choice(pile);
-                    printf("- I took %d\n", n_coins);
-                }
-                pile -= n_coins;
-                player = toggle(player);
-
-                if (pile <= 1) {
-                    break;
-                }
+            if (player == HUMAN) {
+                n_coins = human_choice(pile);
+            } else {
+                n_coins = computer_choice(pile);
+                printf("- I took %d\n", n_coins);
             }
+            pile -= n_coins;
+            player = toggle(player);
+
+            if (pile <= 1) {
+                break;
+            }
+        }
         write_winner(player);
-        playAgainC = play_again();
+        active = play_again();
     }
     printf("Completed\n");
     return 0;
@@ -120,9 +121,9 @@ int play_again(){
         printf("Play again? (Y or N)\n");
         scanf(" %c", &choice);
         if (choice == 89){ // 89 IS ASCII FOR CHARACTER Y
-            return 0;
-        } else if (choice == 78) { // 78 IS ASCII FOR CHARACTER 3
-            return 1;
+            return true;
+        } else if (choice == 78) { // 78 IS ASCII FOR CHARACTER N
+            return false;
         } else {
             printf("Error! Incorrect character! ");
         }
