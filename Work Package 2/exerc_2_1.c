@@ -38,12 +38,11 @@ int main() {
         scanf("%20s",&input);
     } else if (option == 2) {
         FILE *fp;
-        char filename[] = {"./myfile.txt"};
-        if ((fp = fopen(filename, "r")) == NULL) {
+        if ((fp = fopen("../txtfile.txt", "r")) == NULL) {
             printf("Error! opening file");
             return (0);
         } else {
-            fscanf(fp, "%20s", input);
+            fgets(input,21,fp);
         }
     }
 
