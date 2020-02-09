@@ -1,12 +1,26 @@
+/* ====================================
+File name: exerc_3_2.c
+Date: 2020-02-09
+Group nr 11
+Members that contributed to the solutions
+Martynas Lekeckas
+Al-Amir Teniola Abidemi Adegbuji-Onikoyi
+Sebastian Baszczynski
+Member not present at demonstration time:
+-
+Demonstration code: [-]
+!====================================== */
+
 #include <stdio.h>
 #include <stdlib.h>
+#include <ctype.h>
 
 int search_number( int number, int tab[], int size);
 int test [] = { 1,2,56,5,67,3,23,12,13,10};
 
 void printArray(int value, int arr[]) {
 	int i;
-	for (i=0; i < value; i++){
+	for (i = 0; i < value; i++){
     printf("%d ", arr[i]);
   }
 	printf("\n");
@@ -19,16 +33,17 @@ void sort(int arrSize, int arr[])
     printf("UNSORTED ARRAY: ");
     printArray(arrSize, arr);
     
-    for (int i = 0; i < arrSize; i++){
+    int i, j;
+    for (i = 0; i < arrSize; i++){
         minValue = arr[i];
         counter = i;
-        for (int j = i; j < arrSize; j++){
+        for (j = i; j < arrSize; j++){
             if (arr[j] < minValue){
                 minValue = arr[j];
                 counter = j;
             }
         }
-        //swop values
+        //swap values
         temp = arr[i];
         arr[i] = minValue;
         arr[counter] = temp;
@@ -38,24 +53,29 @@ void sort(int arrSize, int arr[])
 }
 
 
-int main(int argc, char const *argv[]) {
-  int num;
+int main() {
+  char input[1];
   printf("Enter an integer:");
-  scanf("%d", &num);
+  scanf("%s", input);
 
+  int num = atoi(input);
   int arraySize = sizeof(test)/sizeof(test[0]);
   int value = search_number(num, test, arraySize);
   int count = sizeof(test);
 
+  if (isdigit(*input) == 1)
+  {
+    if (value >= 0 && value <= count ) {
+      printf("%d\n",value);
+      printf("%d is in the array at index %d\n",num, value);
+      sort(arraySize, test);
 
-  if (value >= 0 && value <= count ) {
-    printf("%d\n",value);
-    printf("%d is in the array at index %d\n",num, value);
-    sort(arraySize, test);
-
+    } else {
+      printf("%d\n",value);
+      printf("%d is not in the array\n",num);
+    }
   } else {
-    printf("%d\n",value);
-    printf("%d is not in the array\n",num);
+    printf("Invalid input");
   }
 
   return 0;
