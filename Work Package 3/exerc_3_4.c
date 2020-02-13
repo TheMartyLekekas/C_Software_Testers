@@ -27,21 +27,13 @@ int main(void) {
 
     while(true){
         printf("-------------------------------------\n"
-<<<<<<< HEAD
                "1 Create a new and delete the old file\n"
-=======
-              "1 Create a new and delete the old file\n"
->>>>>>> 8443b2f35361151bef02d55a79bcfb6765676f58
                "2 Add a new person to the file\n"
                "3 Search for a person in the file\n"
                "4 Print out all in the file\n"
                "5 Exit the program\n"
                "-------------------------------------\n");
-<<<<<<< HEAD
-        scanf(" %d", &input);
-=======
         scanf("%d", &input);
->>>>>>> 8443b2f35361151bef02d55a79bcfb6765676f58
         if(input > 0 && input <= 5) {
             switch (input) {
                 case 1:
@@ -49,7 +41,6 @@ int main(void) {
                     break;
                 case 2:
                     fflush(stdin);
-<<<<<<< HEAD
                     PERSON *newPerson = &ppost;
 
                     printf("Enter your firstname:\n");
@@ -62,23 +53,7 @@ int main(void) {
                     strncpy(newPerson->firstname, A, sizeof(newPerson->firstname));
                     strncpy(newPerson->lastname, B, sizeof(newPerson->lastname));
                     strncpy(newPerson->pers_number, C, sizeof(newPerson->pers_number));
-
-=======
-
-                    PERSON person;
-                    PERSON *newPerson = &person;
-
-                    printf("Enter your firstname:\n");
-                    fgets(newPerson-> firstname, 20, stdin);
-
-                    printf("Enter your lastname:\n");
-                    fgets(newPerson-> lastname, 20, stdin);
-
-                    printf("Enter your personal number:\n");
-                    fgets(newPerson-> pers_number, 13, stdin);
-
-                    fflush(stdin);
->>>>>>> 8443b2f35361151bef02d55a79bcfb6765676f58
+					
                     append_file(newPerson);
                     break;
                 case 3:
@@ -133,26 +108,12 @@ void printfile(void){
     FILE *fp;
     fp=fopen(filename,"rb");
     char s;
-<<<<<<< HEAD
     fp=fopen(file,"rb");
     while((s=fgetc(fp))!=EOF) {
         printf("%c",s);
     }
     printf("\n");
     fclose(fp);
-=======
-    if (fp == NULL) {
-      printf("Error opening %s\n",filename);
-    } else {
-      while((s=fgetc(fp))!=EOF) {
-          printf("%c",&s);
-      }
-      printf("\n");
-      fclose(fp);
-    }
-
-
->>>>>>> 8443b2f35361151bef02d55a79bcfb6765676f58
 }
 
 void search_by_firstname(char *name){
@@ -191,7 +152,6 @@ void search_by_firstname(char *name){
 }
 
 void append_file(PERSON *inrecord){
-<<<<<<< HEAD
     FILE *fp;
     fp = fopen(file, "ab");
 
@@ -207,17 +167,4 @@ void append_file(PERSON *inrecord){
         puts("File has been updated successfully!\n");
         fclose(fp);
     }
-=======
-  char filename[] = {"records.bin"};
-  FILE *fp;
-  fp = fopen(filename, "ab");
-
-  if (fp == NULL) {
-    printf("Error opening %s\n",filename);
-  } else {
-    fwrite(inrecord, 20,1 , fp);
-    puts("File has been updated successfully!\n");
-    fclose(fp);
-  }
->>>>>>> 8443b2f35361151bef02d55a79bcfb6765676f58
 }
