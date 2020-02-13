@@ -1,18 +1,7 @@
-/* ====================================
-File name: exerc_3_4.c
-Date: 2020-02-12
-Group nr 11
-Members that contributed to the solutions
-Martynas Lekeckas
-Al-Amir Teniola Abidemi Adegbuji-Onikoyi
-Sebastian Baszczynski
-Member not present at demonstration time:
--
-Demonstration code: [-]
-!====================================== */
-
 #include <stdlib.h>
 #include <stdio.h>
+#include <string.h>
+
 
 // -----Typedefs -------
 typedef struct {
@@ -84,6 +73,14 @@ PERSON input_record(void){
 }
 
 void write_new_file(PERSON *inrecord){
+
+    char* A = "Robert";
+    strncpy(inrecord->firstname, A, sizeof(inrecord->firstname));
+    char* B = "Lewandowski";
+    strncpy(inrecord->lastname, B, sizeof(inrecord->lastname));
+    char* C = "199905118890";
+    strncpy(inrecord->pers_number, C, sizeof(inrecord->pers_number));
+
     remove("records.bin");
     FILE *fp;
     fp = fopen("records.bin", "w");
@@ -92,10 +89,41 @@ void write_new_file(PERSON *inrecord){
 }
 
 void printfile(void){
-
+    FILE *fp;
+    char s;
+    fp=fopen("new.txt","r");
+    while((s=fgetc(fp))!=EOF) {
+        printf("%c",s);
+    }
+    fclose(fp);
 }
 
 void search_by_firstname(char *name){
+    FILE *fp;
+    int line, col;
+    fp = fopen("records.bin", "r");
+    char str[sizeof(name)];
+    char *pos;
+
+    line = -1;
+    col  = -1;
+
+    while ((fgets(str, sizeof(name), fp)) != NULL)
+    {
+        line += 1;
+
+        pos = strstr(str, name);
+        if (pos != NULL)
+        {
+            col = (pos - str);
+            break;
+        }
+    }
+
+    if (col == -1)
+        line = -1;
+
+    printf("%d",&col);
 
 }
 
