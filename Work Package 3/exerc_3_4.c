@@ -33,7 +33,7 @@ int main(void) {
                "4 Print out all in the file\n"
                "5 Exit the program\n"
                "-------------------------------------\n");
-        scanf("%d", &input);
+        scanf(" %d", &input);
         if(input > 0 && input <= 5) {
             switch (input) {
                 case 1:
@@ -53,24 +53,23 @@ int main(void) {
                     strncpy(newPerson->firstname, A, sizeof(newPerson->firstname));
                     strncpy(newPerson->lastname, B, sizeof(newPerson->lastname));
                     strncpy(newPerson->pers_number, C, sizeof(newPerson->pers_number));
-					
+
                     append_file(newPerson);
                     break;
                 case 3:
-                    /*printf("Search by (F) first name or (L) last name: ");
+                    printf("Search by (F) first name or (L) last name: ");
                     scanf(" %c",&choice);
                     if(choice == 70) {
-                     */
                         printf("Please enter the first name of person:\n");
-                        scanf(" %21s", search);
+                        scanf(" %21s", &search);
                         search_by_firstname(search);
-                    /*} else if(choice == 76){
+                    } else if(choice == 76){
                         printf("Please enter the last name of person:\n");
-                        scanf(" %21s", search);
+                        scanf(" %21s", &search);
                         search_by_firstname(search);
                     } else {
                         printf("Invalid Input!\n");
-                    }*/
+                    }
                     break;
                 case 4:
                     printfile();
@@ -104,20 +103,23 @@ void write_new_file(PERSON *inrecord){
 }
 
 void printfile(void){
-    char filename[] = {"records.bin"};
     FILE *fp;
-    fp=fopen(filename,"rb");
-    char s;
+    size_t len = 0;
+    ssize_t readline;
+    char *line = NULL;
+
     fp=fopen(file,"rb");
-    while((s=fgetc(fp))!=EOF) {
-        printf("%c",s);
+
+    while ((readline = getline(&line,&len, fp)) != -1) {
+        printf("%s",line);
+        printf("\n");
     }
-    printf("\n");
     fclose(fp);
 }
 
 void search_by_firstname(char *name){
     FILE *fp;
+    PERSON temp;
     fp = fopen(file, "r");
     char *line = NULL;
     int i = 0;
@@ -125,27 +127,34 @@ void search_by_firstname(char *name){
     size_t len = 0;
     ssize_t readline;
 
-    if (fp == NULL)
-    {
+    if (fp == NULL){
         printf("Unable to open file.\n");
     } else {
+        PERSON *holder = &temp;
         while ((readline = getline(&line,&len, fp)) != -1) {
             if (strcmp(line, name) == 0) {
                 found = true;
-                i = 0;
             }
-            if (found == true) {
-                if (i == 0) {
-                    i++;
-                    printf("%20s", line);
-                    printf("\n");
-                } else if (i == 1) {
-                    printf("%20s", line);
-                    printf("\n");
-                } else if (i == 2) {
-                    printf("%13s", line);
-                    printf("\n");
-                }
+            if (i == 0) {
+                i++;
+                strncpy(holder->firstname, line, sizeof(holder->firstname));
+            } else if (i == 1) {
+                i++;
+                strncpy(holder->lastname, line, sizeof(holder->lastname));
+            } else if (i == 2) {
+                i++;
+                strncpy(holder->pers_number, line, sizeof(holder->pers_number));
+            }
+
+            if (i==3 && found == true){
+                i=0;
+                found=false;
+                printf("%s",holder->firstname); printf(" ");
+                printf("%s",holder->lastname); printf(" ");
+                printf("%s",holder->pers_number); printf(" "); printf("\n");
+
+            }else if (i==3){
+                i=0;
             }
         }
     }
@@ -168,3 +177,4 @@ void append_file(PERSON *inrecord){
         fclose(fp);
     }
 }
+
