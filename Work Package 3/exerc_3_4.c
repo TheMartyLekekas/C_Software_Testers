@@ -1,7 +1,19 @@
+/* ====================================
+File name: exerc_3_4.c
+Date: 2020-02-05
+Group nr 11
+Members that contributed to the solutions
+Martynas Lekeckas
+Al-Amir Teniola Abidemi Adegbuji-Onikoyi
+Sebastian Baszczynski
+Member not present at demonstration time:
+-
+Demonstration code: [35535]
+!====================================== */
+
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
-
 
 // -----Typedefs -------
 typedef struct {
