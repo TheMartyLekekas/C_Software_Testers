@@ -1,15 +1,3 @@
-/* ====================================
-File name: exerc_3_3.c
-Date: 2020-02-12
-Group nr 11
-Members that contributed to the solutions
-Martynas Lekeckas
-Al-Amir Teniola Abidemi Adegbuji-Onikoyi
-Sebastian Baszczynski
-Member not present at demonstration time:
--
-Demonstration code: [-]
-!====================================== */
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -28,12 +16,17 @@ int main(int argc, char *argv[])
 {
     int nr=0, nr2=0;
     REGTYPE *akt_post, *akt_post2 , *head=NULL;
+    int input;
 
     srand( time(0)); // Random seed
 
     head=random_list();
     akt_post=head;
-    akt_post2 = add_first(akt_post, (rand() % (100 + 1 - 1) + 1));
+
+    printf("Enter data to add in add_first:");
+    scanf("%d",&input);
+
+    akt_post2 = add_first(akt_post,input);
 
 
     while( akt_post!=NULL){
@@ -60,7 +53,7 @@ int main(int argc, char *argv[])
 }
 
 REGTYPE* random_list(void){
-    int nr = rand() % (100 + 1 - 1) + 1;
+    int nr = 20;
     int i=0;
 
     REGTYPE *top;
@@ -68,14 +61,14 @@ REGTYPE* random_list(void){
     REGTYPE *item;
 
     top = malloc(sizeof(REGTYPE));
-    top->number = 0;
+    top->number = rand() % 100;
     top->prev = NULL;
     old = top;
 
     while(i != nr){
         i++;
         item = malloc(sizeof(REGTYPE));
-        item->number = i;
+        item->number = rand() % 100;
         item->prev= old;
         old->next = item;
         old = item;
@@ -91,5 +84,4 @@ REGTYPE* add_first(REGTYPE* temp, int data) {
     new->next= temp;
     temp->prev= new;
     return(new);
-
 }
