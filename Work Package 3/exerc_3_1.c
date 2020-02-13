@@ -27,7 +27,7 @@ void move(int *xpos, int *ypos, char dir);
 void turn(enum DIRECTION *dir);
 
 
-int main() {
+int main(void) {
     ROBOT robot;
     robot.dir = 'N';
 
@@ -39,6 +39,7 @@ int main() {
 
 
     do {
+        robot.dir = 'N';
         int check = read(dirs, posx, posy);
         if(check == 1)
         {
@@ -123,10 +124,10 @@ void turn(enum DIRECTION *dir) {
     case 69:            // ASCII for 'E'
         *dir = 83;
         break;
-    case 83:            // ASCII for 'E'
+    case 83:            // ASCII for 'S'
         *dir = 87;
         break;
-    case 87:            // ASCII for 'E'
+    case 87:            // ASCII for 'W'
         *dir = 78;
         break;
     }

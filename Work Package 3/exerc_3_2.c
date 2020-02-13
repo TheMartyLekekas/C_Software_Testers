@@ -53,18 +53,18 @@ void sort(int arrSize, int arr[])
 }
 
 
-int main() {
+int main(void) {
   char input[1];
   printf("Enter an integer:");
   scanf("%s", input);
 
   int num = atoi(input);
-  int arraySize = sizeof(test)/sizeof(test[0]);
-  int value = search_number(num, test, arraySize);
-  int count = sizeof(test);
-
   if (isdigit(*input) == 1)
   {
+    int arraySize = sizeof(test)/sizeof(test[0]);
+    int value = search_number(num, test, arraySize);
+    int count = sizeof(test);
+
     if (value >= 0 && value <= count ) {
       printf("%d\n",value);
       printf("%d is in the array at index %d\n",num, value);
