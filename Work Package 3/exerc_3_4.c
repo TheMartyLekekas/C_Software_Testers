@@ -27,11 +27,13 @@ int main(void) {
     char choice;
 
     while(true){
-        printf("1 Create a new and delete the old file\n"
+        printf("-------------------------------------\n"
+              "1 Create a new and delete the old file\n"
                "2 Add a new person to the file\n"
                "3 Search for a person in the file\n"
                "4 Print out all in the file\n"
-               "5 Exit the program\n");
+               "5 Exit the program\n"
+               "-------------------------------------\n");
         scanf("%d", &input);
         if(input > 0 && input <= 5) {
             switch (input) {
@@ -39,18 +41,33 @@ int main(void) {
                     write_new_file(&ppost);
                     break;
                 case 2:
-                    append_file(&ppost);
+                    fflush(stdin);
+
+                    PERSON person;
+                    PERSON *newPerson = &person;
+
+                    printf("Enter your firstname:\n");
+                    fgets(newPerson-> firstname, 20, stdin);
+
+                    printf("Enter your lastname:\n");
+                    fgets(newPerson-> lastname, 20, stdin);
+
+                    printf("Enter your personal number:\n");
+                    fgets(newPerson-> pers_number, 13, stdin);
+
+                    fflush(stdin);
+                    append_file(newPerson);
                     break;
                 case 3:
                     printf("Search by (F) first name or (L) last name: ");
                     scanf(" %c",&choice);
                     if(choice == 70) {
                         printf("Please enter the first name of person:\n");
-                        scanf(" %21s", &search);
+                        scanf(" %21s", search);
                         search_by_firstname(search);
                     } else if(choice == 76){
                         printf("Please enter the last name of person:\n");
-                        scanf(" %21s", &search);
+                        scanf(" %21s", search);
                         search_by_firstname(search);
                     } else {
                         printf("Invalid Input!\n");
@@ -89,13 +106,21 @@ void write_new_file(PERSON *inrecord){
 }
 
 void printfile(void){
+    char filename[] = {"records.bin"};
     FILE *fp;
+    fp=fopen(filename,"rb");
     char s;
-    fp=fopen("new.txt","rb");
-    while((s=fgetc(fp))!=EOF) {
-        printf("%c",s);
+    if (fp == NULL) {
+      printf("Error opening %s\n",filename);
+    } else {
+      while((s=fgetc(fp))!=EOF) {
+          printf("%c",&s);
+      }
+      printf("\n");
+      fclose(fp);
     }
-    fclose(fp);
+
+
 }
 
 void search_by_firstname(char *name){
@@ -128,6 +153,15 @@ void search_by_firstname(char *name){
 }
 
 void append_file(PERSON *inrecord){
+  char filename[] = {"records.bin"};
+  FILE *fp;
+  fp = fopen(filename, "ab");
 
+  if (fp == NULL) {
+    printf("Error opening %s\n",filename);
+  } else {
+    fwrite(inrecord, 20,1 , fp);
+    puts("File has been updated successfully!\n");
+    fclose(fp);
+  }
 }
-
