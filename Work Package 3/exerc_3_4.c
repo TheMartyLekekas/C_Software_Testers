@@ -83,7 +83,7 @@ void write_new_file(PERSON *inrecord){
 
     remove("records.bin");
     FILE *fp;
-    fp = fopen("records.bin", "w");
+    fp = fopen("records.bin", "wb");
     fprintf (fp, "%d\n", &inrecord);
     fclose(fp);
 }
@@ -91,7 +91,7 @@ void write_new_file(PERSON *inrecord){
 void printfile(void){
     FILE *fp;
     char s;
-    fp=fopen("new.txt","r");
+    fp=fopen("new.txt","rb");
     while((s=fgetc(fp))!=EOF) {
         printf("%c",s);
     }
@@ -101,7 +101,7 @@ void printfile(void){
 void search_by_firstname(char *name){
     FILE *fp;
     int line, col;
-    fp = fopen("records.bin", "r");
+    fp = fopen("records.bin", "rb");
     char str[sizeof(name)];
     char *pos;
 
