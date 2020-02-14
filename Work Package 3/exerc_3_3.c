@@ -1,18 +1,8 @@
-/* ====================================
-File name: exerc_3_3.c
-Date: 2020-02-05
-Group nr 11
-Members that contributed to the solutions
-Martynas Lekeckas
-Al-Amir Teniola Abidemi Adegbuji-Onikoyi
-Sebastian Baszczynski
-Member not present at demonstration time:
--
-Demonstration code: [36696]
-!====================================== */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+#include <ctype.h>
 
 typedef struct q{
     int number;
@@ -27,17 +17,23 @@ int main(int argc, char *argv[])
 {
     int nr=0, nr2=0;
     REGTYPE *akt_post, *akt_post2 , *head=NULL;
-    int input;
+    char input;
+
 
     srand( time(0)); // Random seed
 
     head=random_list();
     akt_post=head;
 
-    printf("Enter data to add in add_first:");
-    scanf("%d",&input);
+    do{
+        printf("Enter data to add in add_first:");
+        scanf(" %c", &input);
+        if(isdigit(input) == 0){
+            printf("Invalid Input! \n");
+        }
+    }while(isdigit(input) == 0);
 
-    akt_post2 = add_first(akt_post,input);
+    akt_post2 = add_first(akt_post,atoi(&input));
 
 
     while( akt_post!=NULL){
