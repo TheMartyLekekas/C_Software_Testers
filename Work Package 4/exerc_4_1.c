@@ -6,12 +6,24 @@ int main(int argc, char *argv[]) {
 
 
   if (argc == 6) {
-    int engine_on = atoi(argv[1]);
-    int gear_pos = atoi(argv[2]);
-    int key_pos = atoi(argv[3]);
-    int brake1 = atoi(argv[4]);
-    int brake2 = atoi(argv[5]);
+    int engine_on = atoi(argv[1]); // 1
+    int gear_pos = atoi(argv[2]); // 2
+    int key_pos = atoi(argv[3]); // 2
+    int brake1 = atoi(argv[4]); // 1
+    int brake2 = atoi(argv[5]); // 1
 
+    byte |= brake2;             // 00000000 |= 00000001
+    byte |= (brake1 << 1);      // 00000001 |= 00000010
+    byte |= (key_pos << 2);     // 00000011 |= 00001000
+    byte |= (gear_pos << 4);    // 00001011 |= 00000000
+    byte |= (engine_on << 7);   // 00101011 |= 10000000
+
+    printf("%X\n",byte); //print out hexa value in upper case
+    // Bits pattern in hexadecimal
+    // http://csweb.cs.wfu.edu/~turketwh/CSC101/Spring2011/BinaryHex.pdf
+
+    printf("\n");
+    printf("\n");
 
     printf("Name        Value\n");
     printf("----------------\n");
@@ -22,7 +34,7 @@ int main(int argc, char *argv[]) {
     printf("brake2       %d\n", brake2);
 
   } else {
-    puts("Invalid number of arguments");
+    puts("Argument is less or more than five");
   }
 
 
