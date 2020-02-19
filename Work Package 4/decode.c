@@ -64,12 +64,24 @@ int main(int argc, char const *argv[]) {
     printf("Hexadecimal number = %s\n", hex);
     printf("Decimal number = %lld\n", decimal);
 
+    int engine_on = (decimal >> 7) & 0x01;
+    int gear_pos  = (decimal >> 4) & 0x07;
+    int key_pos   = (decimal >> 2) & 0x03;
+    int brake1    = (decimal >> 1) & 0x01;
+    int brake2    = (decimal)      & 0x01;
+
+
+    printf("Name          Value \n");
+    printf("------------------- \n");
+    printf("engine_on     %d \n", engine_on);
+    printf("gear_pos      %d \n", gear_pos);
+    printf("key_pos       %d \n", key_pos);
+    printf("brake1        %d \n", brake1);
+    printf("brake2        %d \n", brake2);
+
   } else {
     fprintf(stderr, "Invalid number of Argument\n");
     return 0;
   }
-
-
-
 
 }
