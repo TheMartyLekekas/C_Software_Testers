@@ -8,7 +8,7 @@ Al-Amir Teniola Abidemi Adegbuji-Onikoyi
 Sebastian Baszczynski
 Member not present at demonstration time:
 -
-Demonstration code: []
+Demonstration code: [23422]
 !====================================== */
 
 #include <time.h>
@@ -25,7 +25,7 @@ int main(){
 	int nr;
 	char hex;
 	unsigned char port;
-	srand(time(0)); 
+	srand(time(0));
 	for ( nr=0; nr < 10; nr++){
 	   port = random_inport();
 	   printport( port);
@@ -64,7 +64,7 @@ void printport( int portvalue){
          binchar[i++]= rest % 2;
          rest = rest / 2;
     }
-	// Fill to 8 bits 
+	// Fill to 8 bits
     while( i<8){
 		binchar[i++]=0;
 	}
