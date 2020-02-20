@@ -18,7 +18,6 @@ Demonstration code: []
 
 
 char hex[20];
-unsigned char temp;
 
 int main(int argc, char const *argv[]) {
   if (argc == 2) {
@@ -27,11 +26,10 @@ int main(int argc, char const *argv[]) {
     /* copy the Argument at index 1 value to the  hexadecimal*/
     strcpy(hex, argv[1]);
 
-    long long decimal, place;
+    long long decimal;
     int i = 0, value, len;
 
     decimal = 0;
-    place = 1;
 
     /* Find the length of total number of hex digit */
     len = strlen(hex);
