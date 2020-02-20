@@ -1,6 +1,6 @@
 /* ====================================
 File name: decode.c
-Date: 2020-02-018
+Date: 2020-02-18
 Group nr 11
 Members that contributed to the solutions
 Martynas Lekeckas
