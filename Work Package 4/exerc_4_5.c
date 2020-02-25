@@ -12,36 +12,79 @@ Demonstration code: [28349]
 !====================================== */
 
 #include <Keypad.h>
-#include <Wire.h>
+#include <Wire.h> 
 
-char scanKey;
-const byte ROWS = 4;
-const byte COLS = 4;
-
-char keys[ROWS][COLS] = {
-    {'1', '2', '3', 'A'},
-    {'4', '5', '6', 'B'},
-    {'7', '8', '9', 'C'},
-    {'F', '0', 'E', 'D'}};
-byte rowPins[ROWS] = {11, 10, 9, 8}; //row pinouts
-byte colPins[COLS] = {7, 6, 5, 4};   //column pinouts
-
-Keypad keyboard = Keypad(makeKeymap(keys), rowPins, colPins, ROWS, COLS);
+char keys[4][4] = {
+  {'1','2','3','A'},
+  {'4','5','6','B'},
+  {'7','8','9','C'},
+  {'F','0','E','D'}
+};
 
 void setup()
 {
-    pinMode(13, OUTPUT);
-    Serial.begin(9600);
+  Serial.begin(9600);
+  DDRD = 0x0;
+  DDRB = B00001111;
 }
 
 void loop()
 {
-    scanKey = keyboard.getKey();
-    switch (scanKey)
-    {
-    case '0' ... 'F':
-        Serial.println(scanKey);
-        break;
+  bool found = false;
+  
+  if(!found){
+    found = check(3);
+    if(!found){
+      found = check(2);
+      if(!found){
+  	    found = check(1);
+        if(!found){
+  	      check(0);
+  	    }
+  	  }
     }
-    //  delay(1000);
+  }
+   
+  delay(500);
+}
+
+bool check(int R) {
+  switch(R){
+    case 3:
+    	PORTB = B00001110;
+          break;
+    case 2:
+    	PORTB = B00001101;
+          break;
+    case 1:
+    	PORTB = B00001011;
+          break;
+    case 0:
+    	PORTB = B00000111;
+          break;
+  }
+    
+  if(PIND != B11110011){
+    int binchar[8], rest, i=0, C;
+    rest = PIND;
+    while(rest!=0){
+         binchar[i++]= rest % 2;
+         rest = rest / 2;
+    }
+    if(binchar[4] == 0){
+    C = 3;}
+    if(binchar[5] == 0){
+    C = 2;}
+    if(binchar[6] == 0){
+    C = 1;}
+    if(binchar[7] == 0){
+    C = 0;}
+    printKey(R,C);
+    return true;
+  }
+  return false;
+}
+
+void printKey(int R, int C){
+	Serial.println(keys[R][C]);
 }
