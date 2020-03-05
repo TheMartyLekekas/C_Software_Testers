@@ -29,8 +29,8 @@ int main(int argc, char *argv[]) {
     byte |= brake2;             // 00000000 |= 00000001
     byte |= (brake1 << 1);      // 00000001 |= 00000010
     byte |= (key_pos << 2);     // 00000011 |= 00001000
-    byte |= (gear_pos << 4);    // 00001011 |= 00000000
-    byte |= (engine_on << 7);   // 00101011 |= 10000000
+    byte |= (gear_pos << 4);    // 00001011 |= 01000000
+    byte |= (engine_on << 7);   // 01001011 |= 10000000
 
     printf("The hexadecimal value is : %X\n",byte); //print out hexa value in upper case
     // Bits pattern in hexadecimal
