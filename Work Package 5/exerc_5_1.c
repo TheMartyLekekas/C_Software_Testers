@@ -1,13 +1,24 @@
+/* ====================================
+File name: exerc_5_1/2.c
+Date: 2020-03-5
+Group nr 11
+Members that contributed to the solutions
+Martynas Lekeckas
+Al-Amir Teniola Abidemi Adegbuji-Onikoyi
+Sebastian Baszczynski
+Member not present at demonstration time:
+-
+Demonstration code: []
+!====================================== */
+
 #include <avr/io.h>
 #include <util/delay.h>
 #include <Keypad.h>
 #include <Wire.h>
 
 bool keyPressed = false;
-int col;
+int col, row;
 char key;
-int row;
-
 
 
 char keys[4][4] = {
@@ -87,8 +98,13 @@ void loop()
     PORTB = 0b00000000;
   if (keyPressed){
     Serial.println(key);
+
+    int read = analogRead(A0);
+    int voltage = read * 5;
+    float temperature = (voltage - 500)/10;
+    Serial.println(temperature);
   }
   keyPressed = false;
 
-
+//delay(500);
 }
