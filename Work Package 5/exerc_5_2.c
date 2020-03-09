@@ -1,5 +1,5 @@
 /* ====================================
-File name: exerc_5_1.c
+File name: exerc_5_2.c
 Date: 2020-03-5
 Group nr 11
 Members that contributed to the solutions
@@ -31,16 +31,16 @@ char keys[4][4] = {
 void setRowLow(int R) {
   switch(R){
     case 3:
-       PORTB = B00001110;
+    	PORTB = B00001110;
           break;
     case 2:
-       PORTB = B00001101;
+    	PORTB = B00001101;
           break;
     case 1:
-       PORTB = B00001011;
+    	PORTB = B00001011;
           break;
     case 0:
-       PORTB = B00000111;
+    	PORTB = B00000111;
           break;
   }
 }
@@ -87,7 +87,8 @@ void setup()
   DDRD = 0x00;
   DDRB = 0b00001111;
 
-  attachInterrupt(digitalPinToInterrupt(2), keyboardirq, FALLING);
+  attachInterrupt(digitalPinToInterrupt(2), keyboardirq , FALLING);
+
 }
 
 void loop()
@@ -97,6 +98,13 @@ void loop()
     PORTB = 0b00000000;
   if (keyPressed){
     Serial.println(key);
+
+    int read = analogRead(A0);
+    int voltage = read * 5;
+    float temperature = (voltage - 500)/10;
+    Serial.println(temperature);
   }
   keyPressed = false;
+
+//delay(500);
 }
