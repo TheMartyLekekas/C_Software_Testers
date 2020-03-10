@@ -1,3 +1,16 @@
+/* ====================================
+File name: exerc_6_3.c
+Date: 2020-03-09
+Group nr 11
+Members that contributed to the solutions
+Martynas Lekeckas
+Al-Amir Teniola Abidemi Adegbuji-Onikoyi
+Sebastian Baszczynski
+Member not present at demonstration time:
+-
+Demonstration code: []
+!====================================== */
+
 #include<stdio.h>
 
 #define ML13_Status 0x0B10
