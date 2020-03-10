@@ -20,4 +20,16 @@
 
 4. It is a global variable that can be accessed inside any of the functions defined in the program.
 
-5. to be continued...
+5. pthread_join(tid, NULL) - this method does two thinngs
+	1. Waits for the to thread to finish its execution
+	2. Clean up any resources associated with the thread
+
+   If you exit the process without joining, then (2) will be done by the OS 
+   (although it won't do thread cancellation cleanup, just nuke the thread from orbit), 
+   and (1) will not. So whether you need to call pthread_join depends whether you need (1) to happen.
+
+   So failure to join with a thread that is joinable produces a "zombie thread". This should be avoided 
+   since Zombie threads consumes some system resource, and when enough zombie threads accumulates, 
+   it will no longer be possible to create new threads.
+
+	
