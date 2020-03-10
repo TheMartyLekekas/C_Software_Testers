@@ -1,0 +1,23 @@
+1. The program creates 2 threads in total during the execution of the program.
+
+2. Line 16: pthread_t tid; this is use to store the thread ID.
+
+   Line 17: pthread_attr_t attr; this is store the attribute for the thread,
+            the attribute to be assigned to the newly created thread.
+
+   Line 20: pthread_attr_init(&attr) function initializes the thread attributes
+            object pointed to by attr with default attribute values.
+ 
+   Line 25: pthread_create(&tid, &attr, runner, NULL), this function creates a new thread by taking 4 arguments: 
+            the thread ID (tid), thread attributes (attr), our function (runner)
+            and the last argument is the pointer to the argument we are passing in our function. 
+            Since we are not passing any argument in the function we used the NULL value.
+
+   Line 26: pthread_join(tid, NULL) this function shall suspend execution of the calling thread tid 
+            until the target thread terminates, unless the target thread has already terminated.
+
+3. Only one parameter is passed to the function, which is NULL value.
+
+4. It is a global variable that can be accessed inside any of the functions defined in the program.
+
+5. to be continued...
