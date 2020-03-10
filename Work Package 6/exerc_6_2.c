@@ -1,7 +1,16 @@
-// Program for exercise 6.2alt in DIT632
-// Version 2020-02-12
-// File : sortandfind_20.c
-// **************************************
+/* ====================================
+File name: exerc_6_4.c
+Date: 2020-03-09
+Group nr 11
+Members that contributed to the solutions
+Martynas Lekeckas
+Al-Amir Teniola Abidemi Adegbuji-Onikoyi
+Sebastian Baszczynski
+Member not present at demonstration time:
+-
+Demonstration code: [26362]
+!====================================== */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <pthread.h>
@@ -26,7 +35,7 @@ int main() {
 	pthread_attr_t attr_3;
 
 	srand((unsigned) time(&t));
-	pthread_attr_init(&attr_1);
+	//pthread_attr_init(&attr_1);
 
 	printf("Enter max value\n");
 	scanf("%d", &max_value);

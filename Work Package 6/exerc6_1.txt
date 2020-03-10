@@ -1,3 +1,14 @@
+File name: exerc_6_3.c
+Date: 2020-03-09
+Group nr 11
+Members that contributed to the solutions
+Martynas Lekeckas
+Al-Amir Teniola Abidemi Adegbuji-Onikoyi
+Sebastian Baszczynski
+Member not present at demonstration time:
+-
+Demonstration code: [22384]
+
 1. The program creates 2 threads in total during the execution of the program.
 
 2. Line 16: pthread_t tid; this is use to store the thread ID.
@@ -7,13 +18,13 @@
 
    Line 20: pthread_attr_init(&attr) function initializes the thread attributes
             object pointed to by attr with default attribute values.
- 
-   Line 25: pthread_create(&tid, &attr, runner, NULL), this function creates a new thread by taking 4 arguments: 
+
+   Line 25: pthread_create(&tid, &attr, runner, NULL), this function creates a new thread by taking 4 arguments:
             the thread ID (tid), thread attributes (attr), our function (runner)
-            and the last argument is the pointer to the argument we are passing in our function. 
+            and the last argument is the pointer to the argument we are passing in our function.
             Since we are not passing any argument in the function we used the NULL value.
 
-   Line 26: pthread_join(tid, NULL) this function shall suspend execution of the calling thread tid 
+   Line 26: pthread_join(tid, NULL) this function shall suspend execution of the calling thread tid
             until the target thread terminates, unless the target thread has already terminated.
 
 3. Only one parameter is passed to the function, which is NULL value.
@@ -21,15 +32,13 @@
 4. It is a global variable that can be accessed inside any of the functions defined in the program.
 
 5. pthread_join(tid, NULL) - this method does two thinngs
-	1. Waits for the to thread to finish its execution
+	1. Waits for the thread to finish its execution
 	2. Clean up any resources associated with the thread
 
-   If you exit the process without joining, then (2) will be done by the OS 
-   (although it won't do thread cancellation cleanup, just nuke the thread from orbit), 
+   If you exit the process without joining, then (2) will be done by the OS
+   (although it won't do thread cancellation cleanup, just nuke the thread from orbit),
    and (1) will not. So whether you need to call pthread_join depends whether you need (1) to happen.
 
-   So failure to join with a thread that is joinable produces a "zombie thread". This should be avoided 
-   since Zombie threads consumes some system resource, and when enough zombie threads accumulates, 
+   So failure to join with a thread that is joinable produces a "zombie thread". This should be avoided
+   since Zombie threads consumes some system resource, and when enough zombie threads accumulates,
    it will no longer be possible to create new threads.
-
-	
