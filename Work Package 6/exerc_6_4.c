@@ -16,71 +16,70 @@ Demonstration code: []
 #include <sys/time.h>
 #include <pthread.h>
 
-void *time_count(void *param);
-void *read_inport(void *param);
+void *time_count();
+void *read_inport();
 double get_time_ms();
 
 int program_time = 0; // The global time, start value 0
-double last_time;
+int last_time = -1;
+int system_time;
 
 int main()
 {
+  system_time = get_time_ms();
+
   time_t t;
 
   pthread_t timer;
-  pthread_attr_t attr_1;
-
   pthread_t inport;
-	pthread_attr_t attr_2;
 
   srand((unsigned) time(&t));
 
-  pthread_attr_init(&attr_1);
-  pthread_create(&timer, &attr_1, time_count, NULL);
+  // Start up the thread time_count.
+  pthread_create(&timer, NULL, time_count, NULL);
 
-
-  pthread_attr_init(&attr_2);
-  pthread_create(&inport, &attr_2, read_inport, NULL);
+  // Start up the thread read_inport.
+  pthread_create(&inport, NULL, read_inport, NULL);
 
   while (program_time < 50) //Print out system time every second.
- {
-   if(program_time < last_time){
-     printf("Program Time: %d\n", program_time);
-     last_time++;
-   }
+  {
+    if(program_time > last_time){
+      printf("Time is %d\n", program_time);
+      last_time = program_time;
+      }
+  }
 
-}
-    pthread_join(timer, NULL);
-    pthread_join(inport, NULL);
+  pthread_join(timer, NULL);
+  pthread_join(inport, NULL);
 
-  // Start up the thread time_count.
-  // Start up the thread read_inport.
-
-return(0);
-
+  return(0);
 }
 
 
-void *time_count(void *param)
+void *time_count()
 {
   while (program_time < 50)
   {
-    if(ctime > last_time){
-      program_time++;s
+    if(get_time_ms() > system_time + 1000){
+      // printf("Program Time222: %d\n", program_time);
+      program_time++;
+      system_time = get_time_ms();
     }
     // Increase program_time by one every second.
   }
   pthread_exit(0);
 }
 
-void *read_inport(void *param){
-  while (program_time<50)
+void *read_inport(){
+  while (program_time < 50)
   {
-    puts("Reading Inport now");
-    // Read Inport every 5 second.
-    // Simulate this just by print out a text : Reading Inport now
+      // Read Inport every 5 second.
+
+    // if(program_time % 5 == 0)
+    // {
+      printf("Reading Inport now\n");
+    // }
   }
-  // Exit thread
   pthread_exit(0);
 }
 
