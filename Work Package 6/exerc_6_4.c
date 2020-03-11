@@ -1,6 +1,6 @@
 /* ====================================
 File name: exerc_6_4.c
-Date: 2020-03-09
+Date: 2020-03-10
 Group nr 11
 Members that contributed to the solutions
 Martynas Lekeckas
@@ -28,9 +28,6 @@ int program_time; // The global time, start value 0
 
 int main()
 {
-  program_time = 0;
-
-
   time_t t;
 
   pthread_t timer;
@@ -41,6 +38,7 @@ int main()
   // Start up the thread read_inport.
   pthread_create(&inport, NULL, read_inport, NULL);
 
+  program_time = 0;
   double system_time;
   double start_time;
 
@@ -48,17 +46,18 @@ int main()
 
   while ( program_time < 50) {
         system_time = get_time_ms();
-        if((system_time - start_time) >= ONE_SECOND){
-            printf("Time is %d \n",program_time);
+        if ((system_time - start_time) >= FIVE_SECONDS && program_time % 5 == 0)
+        {
+            printf("Time is %d \n", program_time);
             start_time = get_time_ms();
         }
   }
 
   pthread_join(timer, NULL);
-  printf("Joining timer thread");
+  printf("Joining time_count thread\n");
 
   pthread_join(inport, NULL);
-  printf("Joining read inport thread");
+  printf("Joining read_inport thread\n");
 
   return(0);
 }
@@ -82,8 +81,9 @@ void *time_count()
   pthread_exit(0);
 }
 
-void *read_inport(){
 
+void *read_inport()
+{
   double start_time;
   double system_time;
 
@@ -97,11 +97,12 @@ void *read_inport(){
             start_time = system_time;
         }
   }
-
   pthread_exit(0);
 }
 
-double get_time_ms(){
+
+double get_time_ms()
+{
   struct timeval t;
   gettimeofday(&t, NULL);
   return (t.tv_sec + (t.tv_usec / 1000000.0)) * 1000.0;
