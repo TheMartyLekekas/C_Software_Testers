@@ -1,6 +1,6 @@
 /* ====================================
 File name: exerc_6_4.c
-Date: 2020-03-09
+Date: 2020-03-10
 Group nr 11
 Members that contributed to the solutions
 Martynas Lekeckas
@@ -16,71 +16,87 @@ Demonstration code: []
 #include <sys/time.h>
 #include <pthread.h>
 
-void *time_count(void *param);
-void *read_inport(void *param);
+#define ONE_SECOND 1000
+#define FIVE_SECONDS 5000
+
+void *time_count();
+void *read_inport();
 double get_time_ms();
 
-int program_time = 0; // The global time, start value 0
-double last_time;
+int program_time; // The global time, start value 0
+
 
 int main()
 {
   time_t t;
 
   pthread_t timer;
-  pthread_attr_t attr_1;
-
   pthread_t inport;
-	pthread_attr_t attr_2;
-
-  srand((unsigned) time(&t));
-
-  pthread_attr_init(&attr_1);
-  pthread_create(&timer, &attr_1, time_count, NULL);
-
-
-  pthread_attr_init(&attr_2);
-  pthread_create(&inport, &attr_2, read_inport, NULL);
-
-  while (program_time < 50) //Print out system time every second.
- {
-   if(program_time < last_time){
-     printf("Program Time: %d\n", program_time);
-     last_time++;
-   }
-
-}
-    pthread_join(timer, NULL);
-    pthread_join(inport, NULL);
 
   // Start up the thread time_count.
+  pthread_create(&timer, NULL, time_count, NULL);
   // Start up the thread read_inport.
+  pthread_create(&inport, NULL, read_inport, NULL);
 
-return(0);
+  program_time = 0;
+  double system_time;
+  double start_time;
 
+  start_time = get_time_ms();
+
+  while ( program_time < 50) {
+        system_time = get_time_ms();
+        if ((system_time - start_time) >= FIVE_SECONDS && program_time % 5 == 0)
+        {
+            printf("Time is %d \n", program_time);
+            start_time = get_time_ms();
+        }
+  }
+
+  pthread_join(timer, NULL);
+  printf("Joining time_count thread\n");
+
+  pthread_join(inport, NULL);
+  printf("Joining read_inport thread\n");
+
+  return(0);
 }
 
 
-void *time_count(void *param)
+void *time_count()
 {
-  while (program_time < 50)
-  {
-    if(ctime > last_time){
-      program_time++;s
-    }
-    // Increase program_time by one every second.
+
+  double system_time;
+  double start_time;
+
+  start_time = get_time_ms();
+
+  while ( program_time < 50) {
+        system_time = get_time_ms();
+        if((system_time - start_time) >= ONE_SECOND){
+            program_time++;
+            start_time = get_time_ms();
+        }
   }
   pthread_exit(0);
 }
 
-void *read_inport(void *param){
-  while (program_time<50)
-  {
-    puts("Reading Inport now");
-    // Read Inport every 5 second.
-    // Simulate this just by print out a text : Reading Inport now
+
+void *read_inport()
+{
+  double start_time;
+  double system_time;
+
+
+  start_time = get_time_ms();
+
+  while ( program_time < 50) {
+        system_time = get_time_ms();
+        if((system_time - start_time) >= FIVE_SECONDS){
+            puts("Reading value now");
+            start_time = system_time;
+        }
   }
-  // Exit thread
   pthread_exit(0);
 }
 
