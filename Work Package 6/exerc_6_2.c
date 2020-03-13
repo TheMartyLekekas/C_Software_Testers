@@ -1,5 +1,5 @@
 /* ====================================
-File name: exerc_6_4.c
+File name: exerc_6_2.c
 Date: 2020-03-09
 Group nr 11
 Members that contributed to the solutions

@@ -1,4 +1,4 @@
-File name: exerc_6_3.c
+File name: exerc_6_1.txt
 Date: 2020-03-09
 Group nr 11
 Members that contributed to the solutions
